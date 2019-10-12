@@ -4,7 +4,13 @@
  */
 package com.remcarpediem.demo.persistent.config;
 
+import io.shardingsphere.core.api.ShardingDataSourceFactory;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
+
+import javax.sql.DataSource;
+import java.sql.SQLException;
 
 /**
  *

@@ -13,6 +13,8 @@ spring:
     username: ${AUTH_DB_PWD:remcarpediem}
     password: ${AUTH_DB_USER:Rem12345678,./}
     type: com.zaxxer.hikari.HikariDataSource
-
-
+sharding:
+  jdbc:
+    datasource:
+      names: ds0,ds1
 
