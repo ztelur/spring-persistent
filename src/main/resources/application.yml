@@ -1,0 +1,15 @@
+server:
+  port: 9030
+
+spring:
+  datasource:
+    hikari:
+      minimum-idle: 10
+      maximum-pool-size: 20
+      pool-name: dbcp1
+      idle-timeout: 10000
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://39.98.179.73:3306/persistent?rewriteBatchedStatements=true&autoReconnect=true&useSSL=false&useUnicode=true&characterEncoding=utf-8
+    username: ${AUTH_DB_PWD:remcarpediem}
+    password: ${AUTH_DB_USER:Rem12345678,./}
+    type: com.zaxxer.hikari.HikariDataSource
