@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -24,8 +25,8 @@ public class controller {
     private OrderService orderService;
 
     @GetMapping("/test")
-    public OrderEntity getBook() {
-        return orderService.getOrderDetail(1L);
+    public OrderEntity getBook(@RequestParam("orderId") Long orderId, @RequestParam("roleId") Long roleId) {
+        return orderService.getOrderDetail(orderId, roleId);
     }
 
     @PostMapping("/test/create")

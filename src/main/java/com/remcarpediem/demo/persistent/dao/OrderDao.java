@@ -17,8 +17,8 @@ import org.apache.ibatis.annotations.Select;
  */
 @Mapper
 public interface OrderDao {
-    @Select("select * from t_order WHERE id = #{id}")
-    OrderEntity selectById(@Param("id") Long id);
+    @Select("select * from t_order WHERE order_id = #{id} AND role_id = #{roleId}")
+    OrderEntity selectById(@Param("id") Long id, @Param("roleId") Long roleId);
 
     @Insert("insert into t_order (order_id,role_id,time,state) VALUE (#{orderId},#{roleId},#{time},#{state})")
     void insert(OrderEntity orderEntity);

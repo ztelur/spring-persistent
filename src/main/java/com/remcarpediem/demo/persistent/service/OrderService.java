@@ -21,8 +21,8 @@ public class OrderService {
     @Autowired
     private OrderDao orderDao;
 
-    public OrderEntity getOrderDetail(Long id) {
-        return orderDao.selectById(id);
+    public OrderEntity getOrderDetail(Long id, Long roleId) {
+        return orderDao.selectById(id, roleId);
     }
 
 
