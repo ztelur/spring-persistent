@@ -9,12 +9,47 @@ spring:
       pool-name: dbcp1
       idle-timeout: 10000
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://39.98.179.73:3306/persistent?rewriteBatchedStatements=true&autoReconnect=true&useSSL=false&useUnicode=true&characterEncoding=utf-8
+    jdbc-url: jdbc:mysql://39.98.179.73:3306/persistent?rewriteBatchedStatements=true&autoReconnect=true&useSSL=false&useUnicode=true&characterEncoding=utf-8
     username: ${AUTH_DB_PWD:remcarpediem}
-    password: ${AUTH_DB_USER:Rem12345678,./}
+    password: 'Rem12345678,./'
     type: com.zaxxer.hikari.HikariDataSource
 sharding:
   jdbc:
     datasource:
       names: ds0,ds1
+      ds0:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        jdbc-url: jdbc:mysql://39.98.179.73:3306/ds0?rewriteBatchedStatements=true&autoReconnect=true&useSSL=false&useUnicode=true&characterEncoding=utf-8
+        username: remcarpediem
+        password: 'Rem12345678,./'
+      ds1:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        jdbc-url: jdbc:mysql://119.27.163.171:3306/ds1?rewriteBatchedStatements=true&autoReconnect=true&useSSL=false&useUnicode=true&characterEncoding=utf-8
+        username: test
+        password: '!Remcarpediem1234'
+  ##默认的分库策略：user_id为奇数-->数据库ds_1,user_id为偶数-->数据库ds_0
+    config:
+      sharding:
+        default-database-strategy:
+          inline:
+            sharding-column: role_id
+            algorithm-expression: ds$->{role_id % 2}
+  ## 这里的t_order是逻辑表，由数据源名 + 表名组成，以小数点分隔。多个表以逗号分隔，支持inline表达式
+  ## 行表达式分片策略
+        default-table-strategy:
+          inline:
+            sharding-column: order_id
+            algorithm-expression: ds$->{order_id % 2}
+        tables:
+          ds:
+            actual-data-nodes: ds$->{0..1}.t_order$->{0..1}
 
+#        tables:
+#          ds:
+#            actual-data-nodes: ds$->{0..1}.t_order_$->{0..1}
+#            table-strategy:
+#              inline:
+#                sharding-column: id
+#                algorithm-expression: t_order_$->{order_id % 2}

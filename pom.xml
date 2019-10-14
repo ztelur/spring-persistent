@@ -51,11 +51,6 @@
 			<scope>test</scope>
 		</dependency>
 
-		<dependency>
-			<groupId>io.shardingsphere</groupId>
-			<artifactId>sharding-jdbc</artifactId>
-			<version>3.0.0.M3</version>
-		</dependency>
 
 		<dependency>
 			<groupId>io.shardingsphere</groupId>

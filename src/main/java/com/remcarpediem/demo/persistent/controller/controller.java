@@ -2,12 +2,15 @@
  * Superid.menkor.com Inc.
  * Copyright (c) 2012-2019 All Rights Reserved.
  */
-package com.remcarpediem.demo.persistent;
+package com.remcarpediem.demo.persistent.controller;
 
-import com.remcarpediem.demo.persistent.entity.BookEntity;
+import com.remcarpediem.demo.persistent.entity.OrderEntity;
+import com.remcarpediem.demo.persistent.form.CreateBookForm;
 import com.remcarpediem.demo.persistent.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -21,7 +24,12 @@ public class controller {
     private OrderService orderService;
 
     @GetMapping("/test")
-    public BookEntity getBook() {
+    public OrderEntity getBook() {
         return orderService.getBookDetail(1L);
+    }
+
+    @PostMapping("/test/create")
+    public void getBook(@RequestBody CreateBookForm form) {
+        orderService.createBook(form.getId(), form.getName());
     }
 }

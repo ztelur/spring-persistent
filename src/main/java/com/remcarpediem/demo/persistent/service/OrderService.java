@@ -5,6 +5,7 @@
 package com.remcarpediem.demo.persistent.service;
 
 import com.remcarpediem.demo.persistent.dao.BookDao;
+import com.remcarpediem.demo.persistent.dao.OrderDao;
 import com.remcarpediem.demo.persistent.entity.BookEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,11 +16,11 @@ import org.springframework.stereotype.Service;
  * @version $Id: BookService.java, v 0.1 2019年10月12日 下午4:57 zt Exp $
  */
 @Service
-public class BookService {
+public class OrderService {
     @Autowired
-    private BookDao bookDao;
+    private OrderDao orderDao;
 
     public BookEntity getBookDetail(Long id) {
-        return bookDao.selectById(id);
+        return orderDao.selectById(id);
     }
 }
