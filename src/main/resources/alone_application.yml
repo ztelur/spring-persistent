@@ -1,4 +1,8 @@
-# 数据分片 + 读写分离
+#
+# 单独数据分片的
+#
+#
+
 server:
   port: 9030
 
@@ -30,18 +34,6 @@ sharding:
         jdbc-url: jdbc:mysql://119.27.163.171:3306/ds1?rewriteBatchedStatements=true&autoReconnect=true&useSSL=false&useUnicode=true&characterEncoding=utf-8
         username: test
         password: '!Remcarpediem1234'
-      ds0slave:
-        type: com.zaxxer.hikari.HikariDataSource
-        driver-class-name: com.mysql.jdbc.Driver
-        jdbc-url: jdbc:mysql://39.98.179.73:3306/ds0slave?rewriteBatchedStatements=true&autoReconnect=true&useSSL=false&useUnicode=true&characterEncoding=utf-8
-        username: remcarpediem
-        password: 'Rem12345678,./'
-      ds1slave:
-        type: com.zaxxer.hikari.HikariDataSource
-        driver-class-name: com.mysql.jdbc.Driver
-        jdbc-url: jdbc:mysql://119.27.163.171:3306/ds1slave?rewriteBatchedStatements=true&autoReconnect=true&useSSL=false&useUnicode=true&characterEncoding=utf-8
-        username: test
-        password: '!Remcarpediem1234'
 
   ##默认的分库策略：user_id为奇数-->数据库ds_1,user_id为偶数-->数据库ds_0
     config:
@@ -49,7 +41,7 @@ sharding:
         default-database-strategy:
           inline:
             sharding-column: role_id
-            algorithm-expression: m$->{role_id % 2}
+            algorithm-expression: ds$->{role_id % 2}
   ## 这里的t_order是逻辑表，由数据源名 + 表名组成，以小数点分隔。多个表以逗号分隔，支持inline表达式
   ## 行表达式分片策略
         default-table-strategy:
@@ -58,14 +50,7 @@ sharding:
             algorithm-expression: t_order$->{order_id % 2}
         tables:
           t_order:
-            actual-data-nodes: m$->{0..1}.t_order$->{0..1}
-        master-slave-rules:
-          m0:
-            master-data-source-name: ds0
-            slave-data-source-names: ds0slave
-          m1:
-            master-data-source-name: ds1
-            slave-data-source-names: ds1slave
+            actual-data-nodes: ds$->{0..1}.t_order$->{0..1}
 #        tables:
 #          ds:
 #            actual-data-nodes: ds$->{0..1}.t_order_$->{0..1}
