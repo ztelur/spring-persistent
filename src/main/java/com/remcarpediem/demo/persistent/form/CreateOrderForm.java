@@ -9,10 +9,10 @@ import lombok.Data;
 /**
  *
  * @author libing
- * @version $Id: CreateBookForm.java, v 0.1 2019年10月14日 下午1:27 zt Exp $
+ * @version $Id: CreateOrderForm.java, v 0.1 2019年10月14日 下午1:27 zt Exp $
  */
 @Data
-public class CreateBookForm {
-    private Long id;
-    private String name;
+public class CreateOrderForm {
+    private Long orderId;
+    private Long roleId;
 }

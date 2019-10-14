@@ -41,9 +41,9 @@ sharding:
         default-table-strategy:
           inline:
             sharding-column: order_id
-            algorithm-expression: ds$->{order_id % 2}
+            algorithm-expression: t_order$->{order_id % 2}
         tables:
-          ds:
+          t_order:
             actual-data-nodes: ds$->{0..1}.t_order$->{0..1}
 
 #        tables:

@@ -8,7 +8,37 @@ POST http://localhost:9030/test/create
 Content-Type: application/json
 
 {
-    "id":1,
-    "name":"English"
+    "orderId":1,
+    "roleId":1
 }
+###
+
+POST http://localhost:9030/test/create
+Content-Type: application/json
+
+{
+    "orderId":2,
+    "roleId":1
+}
+
+###
+
+POST http://localhost:9030/test/create
+Content-Type: application/json
+
+{
+    "orderId":1,
+    "roleId":2
+}
+
+###
+
+POST http://localhost:9030/test/create
+Content-Type: application/json
+
+{
+    "orderId":2,
+    "roleId":2
+}
+
 ###

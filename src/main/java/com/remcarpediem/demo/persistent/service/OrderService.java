@@ -4,11 +4,12 @@
  */
 package com.remcarpediem.demo.persistent.service;
 
-import com.remcarpediem.demo.persistent.dao.BookDao;
 import com.remcarpediem.demo.persistent.dao.OrderDao;
-import com.remcarpediem.demo.persistent.entity.BookEntity;
+import com.remcarpediem.demo.persistent.entity.OrderEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.sql.Timestamp;
 
 /**
  *
@@ -20,7 +21,17 @@ public class OrderService {
     @Autowired
     private OrderDao orderDao;
 
-    public BookEntity getBookDetail(Long id) {
+    public OrderEntity getOrderDetail(Long id) {
         return orderDao.selectById(id);
+    }
+
+
+    public void createOrder(Long orderId, Long roleId) {
+        OrderEntity orderEntity = new OrderEntity();
+        orderEntity.setOrderId(orderId);
+        orderEntity.setRoleId(roleId);
+        orderEntity.setState(1);
+        orderEntity.setTime(new Timestamp(System.currentTimeMillis()));
+        orderDao.insert(orderEntity);
     }
 }

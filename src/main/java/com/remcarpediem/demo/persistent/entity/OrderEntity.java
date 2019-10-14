@@ -15,12 +15,8 @@ import java.sql.Timestamp;
  */
 @Data
 public class OrderEntity {
-    private Long id;
-    private String name;
+    private Long orderId;
+    private Long roleId;
+    private Integer state;
     private Timestamp time;
-
-    public OrderEntity(Long id, String name) {
-        this.id = id;
-        this.name = name;
-    }
 }

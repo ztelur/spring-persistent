@@ -5,7 +5,7 @@
 package com.remcarpediem.demo.persistent.controller;
 
 import com.remcarpediem.demo.persistent.entity.OrderEntity;
-import com.remcarpediem.demo.persistent.form.CreateBookForm;
+import com.remcarpediem.demo.persistent.form.CreateOrderForm;
 import com.remcarpediem.demo.persistent.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,11 +25,12 @@ public class controller {
 
     @GetMapping("/test")
     public OrderEntity getBook() {
-        return orderService.getBookDetail(1L);
+        return orderService.getOrderDetail(1L);
     }
 
     @PostMapping("/test/create")
-    public void getBook(@RequestBody CreateBookForm form) {
-        orderService.createBook(form.getId(), form.getName());
+    public void createOrder(@RequestBody CreateOrderForm form) {
+        orderService.createOrder(form.getOrderId(), form.getRoleId());
     }
+
 }
